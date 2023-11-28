@@ -1,0 +1,5 @@
+React é uma biblioteca Javascript que roda js no servidor e retorna as alterações na página, podendo alterar componentes individualmente.
+Trabalha com o modelo composicional: cada área do site é um componente
+Por boas práticas, tem uma natureza declarativa: onde as funções do js fazem o 'trabalho duro', ex. a função map() do js
+Tem um trabalho de fluxo unidirecional, sempre trazendo dados do componente pai para o filho.
+Tudo em react é js (jsx).
