@@ -1,28 +1,12 @@
 import React from 'react';
-import css from './components/img/css-3.jpg';
+import Header from './components/Header';
+import Corpo from './components/Corpo';
 
-export default function App() {
-  const canal = () => {
-    return ('CFB Cursos')
-  }
-
-  function curso() {
-    return ("Curso de React")
-  }
-  
-  
+export default function App() {  
   return (
     <>
-    <header>
-      <p>Canal: {canal()}</p>
-      <br/>
-      <p>{'Curso: ' + curso()}</p>
-    </header>
-    <section>
-      <img src={css}/>
-      <img src="/html-5.jpg"/>
-    </section>
-
+      <Header/>
+      <Corpo/>
     </>
   )
 }
