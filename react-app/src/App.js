@@ -1,20 +1,24 @@
 import React, {useState} from 'react';
+import MudarImg from './components/MudarImg';
+
 import './App.css';
-import Numero from './components/Numero';
 
-export default function App() { 
-  
-  const [num, setNum] = useState(10)
+export default function App() {
 
-  const [nome, setnome] = useState()
-  
+  const [mudado, setMudado] = useState(false)
+
+  const cancelar = (obj) => {
+    return obj.preventDefault()
+  }
+
   return (
     <>
-      <p>Valor do state num em App: {num}</p>
-      <Numero
-        num={num}
-        setNum={setNum}
+      <MudarImg
+        mudado={mudado}
+        setMudado={setMudado}
       />
+      <br/>
+      <a href="http://youtube.com/cfbcursos"target='_blank' onClick={cancelar}>CFB Cursos</a>
     </>
   )
 }
