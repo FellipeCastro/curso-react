@@ -4,15 +4,34 @@ import './App.css';
 
 export default function App() {
 
-  const carros = ['HRV', 'Golf', 'Focus', 'Cruze', 'Argo']
-  const listaCarros = carros.map((car, i) => 
-    <li key={i}>{i} -   {car}</li>
-  )
+  const [nome, setNome] = useState('HRV')
+
+  const handleChangeNome = (e) => {
+    setNome(e.target.value)
+  }
+
+  const [carro, setCarro] = useState('')
 
   return (
     <>
-      <h1>Carros</h1>
-      <ul>{listaCarros}</ul>
+      <label htmlFor='fnome'>Digite seu nome: </label>
+      <input 
+        type='text'
+        name='fnome'
+        id='fnome'
+        value={nome}
+        onChange={(e) => handleChangeNome(e)}
+      />
+      <p>Nome digitado: {nome}</p>
+
+      <label>Selecione um carro: </label>
+      <select value={carro} onChange={(e) => setCarro(e.target.value)}>
+        <option value="HRV">HRV</option>
+        <option value="Golf">Golf</option>
+        <option value="Cruze">Cruze</option>
+        <option value="Argo">Argo</option>
+      </select>
+      <p>Carro selecionado: {carro}</p>
     </>
   )
 }
