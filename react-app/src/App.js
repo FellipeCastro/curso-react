@@ -4,34 +4,51 @@ import './App.css';
 
 export default function App() {
 
-  const [nome, setNome] = useState('HRV')
-
-  const handleChangeNome = (e) => {
-    setNome(e.target.value)
+  const [form, setForm] = useState({"nome": "", "curso": "", "ano": ""})
+  const handleFormChange = (e) => {
+    if (e.target.getAttribute("name") === "fnome") {
+      setForm({"nome": e.target.value, "curso": form.curso, "ano": form.ano})
+    } else if (e.target.getAttribute("name") === "fcurso") {
+      setForm({"nome": form.nome, "curso": e.target.value, "ano": form.ano})
+    } else if (e.target.getAttribute("name") === "fano") {
+      setForm({"nome": form.nome, "curso": form.curso, "ano": e.target.value})
+    }
   }
-
-  const [carro, setCarro] = useState('')
 
   return (
     <>
-      <label htmlFor='fnome'>Digite seu nome: </label>
+      <label htmlFor='fnome'>Nome: </label>
       <input 
         type='text'
         name='fnome'
         id='fnome'
-        value={nome}
-        onChange={(e) => handleChangeNome(e)}
+        value={form.nome}
+        onChange={(e) => handleFormChange(e)}
       />
-      <p>Nome digitado: {nome}</p>
+      <br/>
 
-      <label>Selecione um carro: </label>
-      <select value={carro} onChange={(e) => setCarro(e.target.value)}>
-        <option value="HRV">HRV</option>
-        <option value="Golf">Golf</option>
-        <option value="Cruze">Cruze</option>
-        <option value="Argo">Argo</option>
-      </select>
-      <p>Carro selecionado: {carro}</p>
+      <label htmlFor='fcurso'>Curso: </label>
+      <input 
+        type='text'
+        name='fcurso'
+        id='fcurso'
+        value={form.curso}
+        onChange={(e) => handleFormChange(e)}
+      />
+      <br/>
+
+      <label htmlFor='fano'>Ano: </label>
+      <input 
+        type='number'
+        name='fano'
+        id='fano'
+        value={form.ano}
+        onChange={(e) => handleFormChange(e)}
+      />
+
+      <p>Nome digitado: {form.nome}</p>
+      <p>Curso digitado: {form.curso}</p>
+      <p>Ano   digitado: {form.ano}</p>
     </>
   )
 }
