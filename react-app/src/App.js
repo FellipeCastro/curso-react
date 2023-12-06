@@ -43,8 +43,6 @@ export default function App() {
         "nota4": e.target.value
       })
     }
-
-
   }
 
   const somaNotas = () => {
