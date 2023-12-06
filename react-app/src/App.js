@@ -1,87 +1,19 @@
 import React, {useState} from 'react';
 
+
 import './App.css';
 
-import Nota from './components/Nota';
-import Resultado from './components/Resultado';
+import Caixa from './components/Caixa';
+import Canal from './components/Canal';
 
-export default function App() {
-
-  const [notas, setNotas] = useState({
-    "nota1": "0",
-    "nota2": "0",
-    "nota3": "0",
-    "nota4": "0"
-  })
-  const handleSetNotas = (e) => {
-    if (e.target.getAttribute('nome') === ('nota1')) {
-      setNotas({
-        "nota1": e.target.value,
-        "nota2": notas.nota2,
-        "nota3": notas.nota3,
-        "nota4": notas.nota4
-      })
-    } else if (e.target.getAttribute('nome') === ('nota2')) {
-      setNotas({
-        "nota1": notas.nota1,
-        "nota2": e.target.value,
-        "nota3": notas.nota3,
-        "nota4": notas.nota4
-      })
-    } else if (e.target.getAttribute('nome') === ('nota3')) {
-      setNotas({
-        "nota1": notas.nota1,
-        "nota2": notas.nota2,
-        "nota3": e.target.value,
-        "nota4": notas.nota4
-      })
-    } else if (e.target.getAttribute('nome') === ('nota4')) {
-      setNotas({
-        "nota1": notas.nota1,
-        "nota2": notas.nota2,
-        "nota3": notas.nota3,
-        "nota4": e.target.value
-      })
-    }
-  }
-
-  const somaNotas = () => {
-    return parseFloat(notas.nota1) + parseFloat(notas.nota2) + parseFloat(notas.nota3) + parseFloat(notas.nota4)
-  }
-  
+export default function App() {  
   return (
     <>
-      <Nota
-        num="1"
-        nome={"nota1"}
-        nota={notas.nota1}
-        setNota={handleSetNotas}
-      />
-
-      <Nota
-        num="2"
-        nome={"nota2"}
-        nota={notas.nota2}
-        setNota={handleSetNotas}
-      />
-
-      <Nota
-        num="3"
-        nome={"nota3"}
-        nota={notas.nota3}
-        setNota={handleSetNotas}
-      />
-
-      <Nota
-        num="4"
-        nome={"nota4"}
-        nota={notas.nota4}
-        setNota={handleSetNotas}
-      />
-
-      <Resultado
-        somaNotas={somaNotas()}
-      />
+      <Caixa site="www.cfbcursos.com.br">
+        <Canal/>
+        <h1>CFB Cursos</h1>
+        <p>Curso de React</p>
+      </Caixa>
     </>
   )
 }
