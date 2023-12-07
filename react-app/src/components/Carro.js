@@ -12,7 +12,16 @@ export default class Carro extends React.Component {
     }
     
     ligarDesligar() {
-        this.setState({ligado: !this.state.ligado})
+        // this.setState({ligado: !this.state.ligado})
+        this.setState((state) => ({
+            ligado: !state.ligado
+        }))
+    }
+
+    acelerar() {
+        this.setState((state, props) => ({
+            velAtual: state.velAtual + props.fator
+        }))
     }
 
     render() {
@@ -22,9 +31,11 @@ export default class Carro extends React.Component {
                 <p>Modelo: {this.modelo}</p>
                 <p>Ligado: {this.state.ligado ? "Sim" : "Não"}</p>
                 <p>Velociade Atual: {this.state.velAtual}</p>
+                <p>{this.state.velAtual >= 100 ? "Multado!" : ""}</p>
                 <button onClick={() => this.ligarDesligar()}>
                     {this.state.ligado ? "Desligar Carro" : "Ligar Carro"}
                 </button>
+                <button onClick={() => this.acelerar()}>Acelerar o Carro</button>
             </div>
         )
     }

@@ -10,7 +10,7 @@ export default function App() {
     <>
       <h1>Componentes de Classe</h1>
       <Classe canal="CFB Cursos" curso="React"/>
-      <Carro/>
+      <Carro fator={10}/>
     </>
   )
 }
