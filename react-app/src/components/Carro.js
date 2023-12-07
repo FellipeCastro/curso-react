@@ -20,9 +20,18 @@ export default class Carro extends React.Component {
     }
 
     acelerar() {
-        this.setState((state, props) => ({
-            velAtual: state.velAtual + props.fator
-        }))
+        {this.state.ligado ? (
+            this.setState((state, props) => ({
+                velAtual: state.velAtual + props.fator
+            }))
+        ) : (
+            alert("Ligue o Carro para poder acelerar!")
+        )}
+
+    }
+
+    alertLigarCarro() {
+        alert("Ligue o carro para poder acelera-lo!")
     }
 
     componentDidMount() { // Quando o componente é montado/ Quando a página é atualizada
@@ -48,7 +57,7 @@ export default class Carro extends React.Component {
                 <button onClick={this.ld}>
                     {this.state.ligado ? "Desligar Carro" : "Ligar Carro"}
                 </button>
-                <button onClick={() => this.acelerar()}>Acelerar o Carro</button>
+                <button onClick={() => this.acelerar()}>Acelerar</button>
             </div>
         )
     }
