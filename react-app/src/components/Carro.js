@@ -30,10 +30,6 @@ export default class Carro extends React.Component {
 
     }
 
-    alertLigarCarro() {
-        alert("Ligue o carro para poder acelera-lo!")
-    }
-
     componentDidMount() { // Quando o componente é montado/ Quando a página é atualizada
         console.log("O Carro foi criado")
     }
