@@ -1,30 +1,46 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import './App.css';
 
-import Globais from './components/Globais';
-import Info from './components/Info';
+import Pagina1 from './components/Pagina1';
+import Pagina2 from './components/Pagina2';
 
 export default function App() {
 
-  const [resumo, setResumo]= useState(Globais.resumo)
-  
-  const gravarResumo = () => {
-    Globais.resumo = resumo
+  const [pagina, setPagina] = useState(0)
+
+  const linksPaginas = (p) => {
+    if (p == 1) {
+      window.open('http://localhoast:3000?1', '_self')
+    } else if (p == 2) {
+      window.open('http://localhoast:3000?2', '_self')
+    }
   }
 
-  const verResumo = () => {
-    alert(Globais.resumo)
-  }
+  useEffect (
+    () => {
+      const url = window.location.href
+      const res = url.split('?')
+      setPagina(res[1])
+    }
+  )
 
+  const retornarPagina = () => {
+    if (pagina == 1) {
+      return <Pagina1/>
+    } else if (pagina == 2) {
+      return <Pagina2/>
+    } else {
+      return <div>
+        <button onClick={() => linksPaginas(1)}>Página 1</button>
+        <button onClick={() => linksPaginas(2)}>Página 2</button>        
+      </div>        
+    }
+  }
+ 
   return (
     <>
-      <Info/>
-      <hr/>
-      <input type="text" size="30" value={resumo} onChange={(e) => setResumo(e.target.value)}/>
-      <br/>
-      <button onClick={() => gravarResumo()}>Gravar Resumo</button>
-      <button onClick={() => verResumo()}>Ver Resumo</button>
+      {retornarPagina()}
     </>
   )
 }
