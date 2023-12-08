@@ -1,46 +1,65 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 import './App.css';
 
-import Pagina1 from './components/Pagina1';
-import Pagina2 from './components/Pagina2';
-
 export default function App() {
 
-  const [pagina, setPagina] = useState(0)
+  const [categoria, setCategoria] = useState("")
+  
+  const carros = [
+    {categoria: "Esporte", preco: "110000", modelo: "Golf GTI"},
+    {categoria: "Esporte", preco: "120000", modelo: "Camaro"},
+    {categoria: "SUV", preco: "85000", modelo: "HRV"},
+    {categoria: "SUV", preco: "83000", modelo: "T-Cross"},
+    {categoria: "Utilitario", preco: "125000", modelo: "Hillux"},
+    {categoria: "Utilitario", preco: "90000", modelo: "Ranger"}
+  ]
 
-  const linksPaginas = (p) => {
-    if (p == 1) {
-      window.open('http://localhoast:3000?1', '_self')
-    } else if (p == 2) {
-      window.open('http://localhoast:3000?2', '_self')
-    }
-  }
+  const linhas = (cat) => {
+    const li = [];
+    carros.forEach((carro) => {
+      if (!cat || carro.categoria?.toUpperCase() === cat.toUpperCase()) {
+        li.push(
+          <tr key={carro.modelo}>
+            <td>{carro.categoria}</td>
+            <td>{carro.preco}</td>
+            <td>{carro.modelo}</td>
+          </tr>
+        );
+      }
+    });
 
-  useEffect (
-    () => {
-      const url = window.location.href
-      const res = url.split('?')
-      setPagina(res[1])
-    }
-  )
+    return li;
+  };
 
-  const retornarPagina = () => {
-    if (pagina == 1) {
-      return <Pagina1/>
-    } else if (pagina == 2) {
-      return <Pagina2/>
-    } else {
-      return <div>
-        <button onClick={() => linksPaginas(1)}>Página 1</button>
-        <button onClick={() => linksPaginas(2)}>Página 2</button>        
-      </div>        
-    }
-  }
- 
+  const tabelaCarros = (cat) => {
+    return (
+      <table border="1" style={{ borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th>Categoria</th> <th>Preço</th> <th>Modelo</th>
+          </tr>
+        </thead>
+        <tbody>{linhas(cat)}</tbody>
+      </table>
+    );
+  };
+
+  const pesquisaCategoria = (cat, scat) => {
+    return (
+      <div>
+        <label>Digite uma Categoria</label>
+        <br />
+        <input type="text" value={cat} onChange={(e) => scat(e.target.value)} />
+      </div>
+    );
+  };
+
   return (
     <>
-      {retornarPagina()}
+      {pesquisaCategoria(categoria, setCategoria)}
+      <br />
+      {tabelaCarros(categoria)}
     </>
-  )
+  );
 }
