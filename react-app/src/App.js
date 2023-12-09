@@ -2,64 +2,101 @@ import React, {useState} from 'react';
 
 import './App.css';
 
+const tabelaIMC = () => {
+  return (
+    <table border="1" style={{borderCollapse: "collapse"}}>
+      <thead>
+        <tr>
+          <th>
+            Classificação
+          </th>
+          <th>
+            IMC
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Abaixo do Peso</td>
+          <td>Abaixo de 18,5</td>
+        </tr>
+        <tr>
+          <td>Peso Normal</td>
+          <td>Entre 18,5 e 24,9</td>
+        </tr>
+        <tr>
+          <td>Sobrepeso</td>
+          <td>Entre 15 e 29,9</td>
+        </tr>
+        <tr>
+          <td>Obesidade Grau I</td>
+          <td>Entre 30 e 24,9</td>
+        </tr>
+        <tr>
+          <td>Obesidade Grau II</td>
+          <td>Entre 35 e 39,9</td>
+        </tr>
+        <tr>
+          <td>Obesidade Grau III ou Mórbita</td>
+          <td>Maior que 40</td>
+        </tr>
+      </tbody>
+    </table>
+  )
+}
+
+const fpeso = (p, sp) => {
+  return (
+    <div>
+      <label htmlFor='peso'>Peso </label>
+      <input type="text" value={p} onChange={(e) => sp(e.target.value)} id='peso'/>
+    </div>
+  )
+}
+
+const faltura = (a, sa) => {
+  return (
+    <div>
+      <label htmlFor='altura'>Altura </label>
+      <input type="text" value={a} onChange={(e) => sa(e.target.value)} id='peso'/>
+    </div>
+  )
+}
+
+const fcalcular = (p, a, sr) => {
+  
+  const calc = () => {
+      sr(p/(a*a))
+  }
+  
+  return (
+    <div>
+      <button onClick={calc}>Calcular</button>
+    </div>
+  )
+}
+
+const fresultado = (r) => {
+  return (
+    <div>
+      <p>Resultado: {r.toFixed(2)}</p>
+    </div>
+  )
+}
+
 export default function App() {
 
-  const [categoria, setCategoria] = useState("")
-  
-  const carros = [
-    {categoria: "Esporte", preco: "110000", modelo: "Golf GTI"},
-    {categoria: "Esporte", preco: "120000", modelo: "Camaro"},
-    {categoria: "SUV", preco: "85000", modelo: "HRV"},
-    {categoria: "SUV", preco: "83000", modelo: "T-Cross"},
-    {categoria: "Utilitario", preco: "125000", modelo: "Hillux"},
-    {categoria: "Utilitario", preco: "90000", modelo: "Ranger"}
-  ]
-
-  const linhas = (cat) => {
-    const li = [];
-    carros.forEach((carro) => {
-      if (!cat || carro.categoria?.toUpperCase() === cat.toUpperCase()) {
-        li.push(
-          <tr key={carro.modelo}>
-            <td>{carro.categoria}</td>
-            <td>{carro.preco}</td>
-            <td>{carro.modelo}</td>
-          </tr>
-        );
-      }
-    });
-
-    return li;
-  };
-
-  const tabelaCarros = (cat) => {
-    return (
-      <table border="1" style={{ borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            <th>Categoria</th> <th>Preço</th> <th>Modelo</th>
-          </tr>
-        </thead>
-        <tbody>{linhas(cat)}</tbody>
-      </table>
-    );
-  };
-
-  const pesquisaCategoria = (cat, scat) => {
-    return (
-      <div>
-        <label>Digite uma Categoria</label>
-        <br />
-        <input type="text" value={cat} onChange={(e) => scat(e.target.value)} />
-      </div>
-    );
-  };
+  const [peso, setPeso] = useState()
+  const [altura, setAltura] = useState()
+  const [resultado, setResultado] = useState(0)
 
   return (
     <>
-      {pesquisaCategoria(categoria, setCategoria)}
-      <br />
-      {tabelaCarros(categoria)}
+      {fpeso(peso, setPeso)}
+      {faltura(altura, setAltura)}
+      {fcalcular(peso, altura, setResultado)}
+      {fresultado(resultado)}
+      {tabelaIMC()}
     </>
   );
 }
