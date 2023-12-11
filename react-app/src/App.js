@@ -21,7 +21,7 @@ export default function App() {
 
   const btn = (label, onClick) => {
     return (
-      <button style={cssBtn} onClick={onclick}>
+      <button style={cssBtn} onClick={onClick}>
         {label}
       </button>
     )
@@ -30,7 +30,6 @@ export default function App() {
   // Funções
   const addDigitoTela = (d) => {
     if ((d == "+" || d == "-" || d == "*" || d == "/") && operado) {
-      console.log("+-*/")
       setOperado(false)
       setValorTela(resultado + d)
       return
@@ -54,12 +53,46 @@ export default function App() {
     return
   }
 
+  const operacao = (oper) => {
+    if (oper == 'bs') {
+      let vtela = valorTela
+      vtela = vtela.substring(0, (vtela.length - 1))
+      setValorTela(vtela)
+      setOperado(false)
+      return
+    }
+
+    try{
+      const r = eval(valorTela)
+      setAcumulador(r)
+      setResultado(r)
+      setOperado(true)
+    }catch{
+      setResultado("ERRO")
+    }
+  }
+
   // Estilos
+  const cssContainer = {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'column',
+    width: '300px',
+    border: '1px solid #000'
+  }
+
+  const cssBotoes = {
+    display:'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  }
+
   const cssTela = {
     display:'flex',
     padding: '0 20px',
     justifyContent: 'center',
-    alignItems: 'flex-start',
+    alignItems: 'flex-end',
     backgroundColor: '#444',
     flexDirection: 'column',
     width: '260px'
@@ -90,7 +123,33 @@ export default function App() {
   
   return (    
     <>
+      <div style={cssContainer}>
+        <h3>Calculadora Matemática Simples</h3>
 
+        {tela(valorTela, resultado)}
+        <div style={cssBotoes}>
+          {btn('AC', limparMemoria)}
+          {btn('(', () => addDigitoTela('('))}
+          {btn(')', () => addDigitoTela(')'))}
+          {btn('/', () => addDigitoTela('/'))}
+          {btn('7', () => addDigitoTela('7'))}
+          {btn('8', () => addDigitoTela('8'))}
+          {btn('9', () => addDigitoTela('9'))}
+          {btn('*', () => addDigitoTela('*'))}
+          {btn('4', () => addDigitoTela('4'))}
+          {btn('5', () => addDigitoTela('5'))}
+          {btn('6', () => addDigitoTela('6'))}
+          {btn('-', () => addDigitoTela('-'))}
+          {btn('1', () => addDigitoTela('1'))}
+          {btn('2', () => addDigitoTela('2'))}
+          {btn('3', () => addDigitoTela('3'))}
+          {btn('+', () => addDigitoTela('+'))}
+          {btn('0', () => addDigitoTela('0'))}
+          {btn('.', () => addDigitoTela('.'))}
+          {btn('<', () => operacao('bs'))}
+          {btn('=', () => operacao('='))}
+        </div>
+      </div>
     </>
   );
 }
