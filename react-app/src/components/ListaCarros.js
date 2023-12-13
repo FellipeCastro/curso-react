@@ -1,25 +1,25 @@
 import React, {useState, useEffect} from "react";
-import axios from 'axios';
 
 export default function ListaCarros() {
     
     const [carros, setCarros] = useState([])
 
     useEffect(() => {
-        axios.get(/*url da API*/)
-            .then(res => {
-                const dadosCarros = res.data
-                setCarros(dadosCarros)
-            })
+
+        fetch(/*url da API*/)
+        .then(resultado => resultado.json()) // transformando dados em JSON
+        .then((res) => {
+            setCarros(res) // colocando dados no state
+        })
     })
 
     return (
-        <div>
+        <ul>
             {carros.map(carro => {
-                <div key={carro.id}>
+                <li key={carro.id}>
                     {carro.marca} - {carro.modelo}
-                </div>
+                </li>
             })}
-        </div>
+        </ul>
     )
 }
