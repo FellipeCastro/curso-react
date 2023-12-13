@@ -66,9 +66,7 @@ export default function App() {
   }
 
   const BtnJogarNovamente = () => {
-    if (!jogando) {
-      return <button onClick={() => reiniciar()}>Jogar Novamente</button>
-    }
+      return <button onClick={() => reiniciar()} style={{width: '100%', margin: '0 auto'}}>Jogar Novamente</button>
   }
 
   const verificaVitoria = () => {
@@ -183,7 +181,8 @@ export default function App() {
       
       {tabu(jogo)}
 
-      {BtnJogarNovamente}
+      {BtnJogarNovamente()}
+
     </div>
   );
 }
