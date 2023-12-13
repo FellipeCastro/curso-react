@@ -64,6 +64,89 @@ export default function App() {
       </div>
     )
   }
+
+  const verificaVitoria = () => {
+    // verificação das linhas
+    let pontos = 0
+    let vitoria = false
+    for (let l = 0; l < 3; l++) {
+      pontos = 0
+      for (let c = 0; c < 3; c++) {
+        if (jogo[l][c] == simboloAtual) {
+          pontos++
+        }
+      }
+      
+      if (pontos == 3) {
+        vitoria = true
+        break
+      }
+    }
+
+    // verificação das colunas 
+    for (let c = 0; c < 3; c++) {
+      pontos = 0
+      for (let l = 0; l < 3; l++) {
+        if (jogo[l][c] == simboloAtual) {
+          pontos++
+        }
+      }
+
+      if (pontos == 3) {
+        vitoria = true
+        break
+      }
+    }
+
+    // verificação das diagonais
+    pontos = 0
+    for (let d = 0; d < 3; d++) {
+      if (jogo[d][d]) {
+        if (jogo[l][c] == simboloAtual) {
+          pontos++
+        }
+      }
+    }
+
+    if (pontos == 3) {
+      vitoria = true
+      return false
+    }
+
+    pontos = 0
+    let l = 0
+    for (let c = 2; c >= 0; c--) {
+      if (jogo[l][c] == simboloAtual) {
+        pontos++
+      }
+      l++
+    }
+
+    if (pontos == 3) {
+      vitoria = true
+      return false
+    }
+
+    return vitoria
+  }
+
+  const trocaJogador = () => {
+    simboloAtual == 'X' ? setSimboloAtual('O') : setSimboloAtual('X')
+  }
+
+  const retornaPosicao = (e) => {
+    const p = e.target.getAttribute('data-pos')
+    const pos = [parseInt(p.substring(0, 1)), parseInt(p.substring(1, 2))]
+    return pos
+  } 
+
+  const verificaEspacoVazio = (e) => {
+    if (jogo[retornaPosicao(e)[0]][retornaPosicao(e)[1]] == '') {
+      return true
+    } else {
+      return false
+    }
+  }
   
   return (    
     <>
